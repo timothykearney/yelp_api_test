@@ -5,19 +5,36 @@
 <script>
 
 $.ajax({
-	url: "https://api.yelp.com/businesses/search",
-	data: { location: 60618 },
-	method: "GET",
-	headers: { "Authorization": "Bearer QUatEtUOtI6dxPlZ1kDjFG6iNyNKEayrhG-p1knnxznBwAMuEg30KqIg9Gih7WTC8t3Qs54vSpnwJ184x00qUwW16p1f6e9U45tSqekyOXrKiGcCm7sr4lnhSvLvWXYx" },
-	success: function (response) { console.log(response) }
+	url: 'https://api.yelp.com/oauth2/token?client_id=DHxJ7Wr_AkGUPEDMLNgU6w&client_secret=QmtCpERHyP6v08ecHgmiSEnycyiOJSP4vezgmn3miNHecC4hO0Kj82GkZx8usUo4',
+	method: 'POST',
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+	},
+	body: JSON.stringify({
+		grant_type: 'client_credentials',
+	})
+})
+.then((res) => res.json())
+.then((resJSON) => {
+	this.setState({ access_token: resJSON.access_token });
+	console.log(resJSON)
+})
+.then(() => {
+    $.ajax({
+    	url: 'https://api.yelp.com/v3/businesses/search?location=12345',
+      	method: 'GET',
+      	headers: {
+        	'authorization': 'Bearer ' + this.state.access_token
+		}
+    })
+    .then((res) => res.json())
+    .then((resJSON) => {
+		console.log('resJSON', resJSON)
+    })
+})
+.catch((err) => {
+	console.log('err', err);
 });
-
-/*
-"access_token": "QUatEtUOtI6dxPlZ1kDjFG6iNyNKEayrhG-p1knnxznBwAMuEg30KqIg9Gih7WTC8t3Qs54vSpnwJ184x00qUwW16p1f6e9U45tSqekyOXrKiGcCm7sr4lnhSvLvWXYx",
-    "expires_in": 638586291,
-    "token_type": "Bearer"
-}
-*/
 
 </script>
 </body>
