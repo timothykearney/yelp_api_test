@@ -1,0 +1,24 @@
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+$.ajax({
+	url: "https://api.yelp.com/businesses/search",
+	data: { location: 60618 },
+	method: "GET",
+	headers: { "Authentication": "Bearer QUatEtUOtI6dxPlZ1kDjFG6iNyNKEayrhG-p1knnxznBwAMuEg30KqIg9Gih7WTC8t3Qs54vSpnwJ184x00qUwW16p1f6e9U45tSqekyOXrKiGcCm7sr4lnhSvLvWXYx" },
+	success: function (response) { console.log(response) }
+});
+
+/*
+"access_token": "QUatEtUOtI6dxPlZ1kDjFG6iNyNKEayrhG-p1knnxznBwAMuEg30KqIg9Gih7WTC8t3Qs54vSpnwJ184x00qUwW16p1f6e9U45tSqekyOXrKiGcCm7sr4lnhSvLvWXYx",
+    "expires_in": 638586291,
+    "token_type": "Bearer"
+}
+*/
+
+</script>
+</body>
+</html>
